@@ -12,10 +12,10 @@ import (
 )
 
 var (
-	app             = kingpin.New("main", "Route53 hosted zone and zone record limit checker")
-	inCli           = app.Flag("cli", "Whether to run Speedtrap as a CLI tool (which will not post messages to Slack)").Default("true").Envar("RUN_CLI").Bool()
-	inLambda        = app.Flag("runLambda", "Whether to run the Lambda portions of Speedtrap (which will post messages to Slack").Default("false").Envar("RUN_LAMBDA").Bool() //The Terraform code that deploys this Go code as a Lambda function sets RUN_LAMBDA to "true"
-	sites           = app.Flag("sites", "Slack webhook URL").Envar("SITES").String()
+	app             = kingpin.New("main", "Uptime Monitor")
+	inCli           = app.Flag("cli", "Whether to run Uptime Monitor as a CLI tool").Default("true").Envar("RUN_CLI").Bool()
+	inLambda        = app.Flag("runLambda", "Whether to run the Lambda portions of Speedtrap (which will post messages to Slack").Default("false").Envar("RUN_LAMBDA").Bool()
+	sites           = app.Flag("sites", "Site URLs to check").Envar("SITES").String()
 	slackWebHookURL = app.Flag("slackWebHookURL", "Slack webhook URL").Envar("SLACK_WEBHOOK_URL").String()
 )
 
@@ -32,8 +32,8 @@ func LambdaHandler() {
 				message := slack.BuildSlackMessage(*resp, site)
 				slack.PostToSlack(message, *slackWebHookURL)
 			}
-			log.Debugf("Request finished.")
 		}
+		log.Debugf("Request finished.")
 	}
 }
 

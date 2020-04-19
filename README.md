@@ -1,6 +1,6 @@
 ## AWS Uptime Monitoring Lambda Function with Terraform
 
-This terraform module helps you to monitor your sites. It will be trigger every 5 minutest to check your website.
+This terraform module helps you to monitor your sites. It will be trigger every 5 minutes to check your website.
 
 ### Setup
 Go to lambda directory and run following command. It will build Go package and zip it.
