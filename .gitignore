@@ -1,0 +1,5 @@
+.aws
+.terraform
+.idea
+terraform.tfstate*
+deployment.zip
